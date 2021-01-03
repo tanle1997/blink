@@ -68,17 +68,25 @@ void LCD_SendCommand(unsigned char Command)
     Command & 0x0Fu));
 }
 
+/** @brief Goto position on screen
+ * @param x 
+ * @param y 
+ * @return True if the position is valid
+ */
 unsigned char LCD_GotoXY(unsigned char x, unsigned char y)
 {
   unsigned char retVal = 1;
+  unsigned char address = 0;
 
-  if ((x > ROW_MAX_LENGTH) || (y > COL_MAX_LENGTH))
+  if ((x > (ROW_MAX_LENGTH - 1u)) || \
+      (y > (COL_MAX_LENGTH - 1u)))
   {
     retVal = 0;
   }
   else
   {
-
+    address = (0x40u * y) + x;
+    LCD_SendCommand(SET_DDRAM_ADDR_CMD(address));
   }
 
   return retVal;
