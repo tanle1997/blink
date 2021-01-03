@@ -105,7 +105,9 @@ unsigned char LCD_GotoXY(unsigned char x, unsigned char y)
 }
 
 /** @brief Internal function to write data to 74HC595
- * @param Data
+ * @param Data Data to be written, follow bit structure:<br>
+ * B7 B6 B5 B4 B3 B2 B1 B0
+ * 0  0  D7 D6 D5 D4 E  RS
  * @return None
 */
 static void LCD_Send4Bit(unsigned int Data)
@@ -125,6 +127,10 @@ void LCD_PutString(unsigned char * const Character)
   }
 }
 
+/** @brief Write a character to DDRAM
+ * @param Character ASCII code
+ * @return None
+*/
 void LCD_PutChar(unsigned char Character)
 {
   /* 4-bit high */
@@ -141,6 +147,7 @@ void LCD_PutChar(unsigned char Character)
 
 /** @brief Clear the screen 
  * @param None
+ * @return None
 */
 void LCD_ClearDisplay(void)
 {

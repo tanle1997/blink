@@ -23,3 +23,10 @@ MDK-ARM/blink/stm32f1xx_hal_tim.o
 MDK-ARM/blink/stm32f1xx_hal.o
 MDK-ARM/blink/stm32f1xx_it.o
 MDK-ARM/blink/system_stm32f1xx.o
+MDK-ARM/blink.uvguix.TanLe
+MDK-ARM/blink/blink_blink.dep
+MDK-ARM/blink/blink.axf
+MDK-ARM/blink/blink.build_log.htm
+MDK-ARM/blink/blink.htm
+MDK-ARM/blink/lcd.crf
+MDK-ARM/blink/lcd.o
