@@ -35,7 +35,11 @@ void LCD_Init(void)
                   DISPLAY_CONTROL_BLINK_CURSOR_OFF));
 }
 
-static void LCD_LInit()
+/** @brief Internal function to Initialize
+ * @param None
+ * @return None
+*/
+static void LCD_LInit(void)
 {
   /* Initialization */
   /* Send 0x03 */
@@ -58,6 +62,10 @@ static void LCD_LInit()
   HAL_Delay(1);
 }
 
+/** @brief Write a command to LCD
+ * @param Command
+ * @return None
+*/
 void LCD_SendCommand(unsigned char Command)
 {
   /* Make a falling edge on Pin E to write 4 bit high */
@@ -73,8 +81,8 @@ void LCD_SendCommand(unsigned char Command)
 }
 
 /** @brief Goto position on screen
- * @param x 
- * @param y 
+ * @param x Column index
+ * @param y Row index
  * @return True if the position is valid
  */
 unsigned char LCD_GotoXY(unsigned char x, unsigned char y)
