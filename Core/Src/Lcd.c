@@ -13,7 +13,7 @@ typedef enum
 static void LCD_Send4Bit(unsigned int Data);
 static void LCD_LInit(void);
 
-/** @brief Init the LCD using IC HD44780 
+/** @brief Init LCD (IC HD44780)
  * @param None
  * @return None
 */
@@ -96,7 +96,10 @@ unsigned char LCD_GotoXY(unsigned char x, unsigned char y)
   return retVal;
 }
 
-/** @brief Internal function to write data to 74HC595 */
+/** @brief Internal function to write data to 74HC595
+ * @param Data
+ * @return None
+*/
 static void LCD_Send4Bit(unsigned int Data)
 {
   ShiftData(Data);
