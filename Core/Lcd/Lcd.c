@@ -6,7 +6,9 @@
 #define COL_MAX_LENGTH  (0x02u)
 typedef enum
 {
+  /* Command instruction */
   COMMAND = 0x00u,
+  /* Data instruction */
   DATA,
 }LcdInstructionType;
 
@@ -105,7 +107,7 @@ unsigned char LCD_GotoXY(unsigned char x, unsigned char y)
 }
 
 /** @brief Internal function to write data to 74HC595
- * @param Data Data to be written, follow bit structure:<br>
+ * @param Data Data to be written, follow bit structure
  * B7 B6 B5 B4 B3 B2 B1 B0
  * 0  0  D7 D6 D5 D4 E  RS
  * @return None

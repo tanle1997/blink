@@ -39,15 +39,25 @@
 #define FUNCTION_SET_F_5X10_DOTS            (0x01u)
 #define FUNCTION_SET_F_5X8_DOTS             (0x00u)
 
+/** Set Character address register */
 #define SET_CGRAM_ADDR_CMD(ACG)             (0x40u | (ACG & 0x3Fu))
+
+/** Set Address register */
 #define SET_DDRAM_ADDR_CMD(ADD)             (0x80u | (ADD & 0x7Fu))
 
+/** Use 74HC595 to control the LCD with 4-bit mode
+ * This macro to encode more parameters into 8-bit data
+*/
 #define PACK_DATA_4BIT_INTERFACE(RS, E, DATA)   (0x00u | \
                                                 ((RS | ((E & 0x01u) << 1u) | ((DATA & 0x0Fu) << 2u))))
-void LCD_SendCommand(unsigned char Command);
-unsigned char LCD_GotoXY(unsigned char x, unsigned char y);
-void LCD_ClearDisplay(void);
-void LCD_Init(void);
-void LCD_PutChar(unsigned char Character);
-void LCD_PutString(unsigned char * const Character);
-#endif
+
+
+/*********************** API ***************************/
+extern void LCD_SendCommand(unsigned char Command);
+extern unsigned char LCD_GotoXY(unsigned char x, unsigned char y);
+extern void LCD_ClearDisplay(void);
+extern void LCD_Init(void);
+extern void LCD_PutChar(unsigned char Character);
+extern void LCD_PutString(unsigned char * const Character);
+
+#endif // End of _LCD_H

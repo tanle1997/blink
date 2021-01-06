@@ -1,4 +1,4 @@
-blink\lcd.o: ..\Core\Src\Lcd.c
+blink\lcd.o: ..\Core\Lcd\Lcd.c
 blink\lcd.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 blink\lcd.o: ../Core/Inc/stm32f1xx_hal_conf.h
 blink\lcd.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h
@@ -24,5 +24,5 @@ blink\lcd.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
 blink\lcd.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 blink\lcd.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 blink\lcd.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
-blink\lcd.o: ..\Core\Src\Lcd.h
-blink\lcd.o: ..\Core\Src\ShiftReg.h
+blink\lcd.o: ..\Core\Lcd\Lcd.h
+blink\lcd.o: ..\Core\ShiftReg\ShiftReg.h

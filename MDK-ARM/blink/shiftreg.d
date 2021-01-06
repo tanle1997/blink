@@ -1,5 +1,5 @@
-blink\shiftreg.o: ..\Core\Src\ShiftReg.c
-blink\shiftreg.o: ..\Core\Src\ShiftReg.h
+blink\shiftreg.o: ..\Core\ShiftReg\ShiftReg.c
+blink\shiftreg.o: ..\Core\ShiftReg\ShiftReg.h
 blink\shiftreg.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
 blink\shiftreg.o: ../Core/Inc/stm32f1xx_hal_conf.h
 blink\shiftreg.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h
