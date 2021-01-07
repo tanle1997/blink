@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "Types.h"
 #include "Lcd.h"
 #include "ShiftReg.h"
 
@@ -66,7 +67,7 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+  unsigned char message[] = "message";
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -92,7 +93,8 @@ int main(void)
   /* USER CODE END 2 */
   LCD_Init();
   (void) LCD_GotoXY(2, 1);
-  LCD_PutString("abc");
+  if (sizeof(unsigned short int) == 2)
+  LCD_PutString((uint8 *)message);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)

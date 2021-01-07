@@ -1,9 +1,11 @@
 #include "stm32f1xx_hal.h"
+#include "Types.h"
 #include "Lcd.h"
 #include "ShiftReg.h"
 
-#define ROW_MAX_LENGTH  (0x28u)
-#define COL_MAX_LENGTH  (0x02u)
+#define COL_MAX_LENGTH  (0x28u)
+#define ROW_MAX_LENGTH  (0x02u)
+
 typedef enum
 {
   /* Command instruction */
@@ -12,7 +14,7 @@ typedef enum
   DATA,
 }LcdInstructionType;
 
-static void LCD_Send4Bit(unsigned int Data);
+static void LCD_Send4Bit(uint8 Data);
 static void LCD_LInit(void);
 
 /** @brief Init LCD (IC HD44780)
@@ -68,7 +70,7 @@ static void LCD_LInit(void)
  * @param Command
  * @return None
 */
-void LCD_SendCommand(unsigned char Command)
+void LCD_SendCommand(uint8 Command)
 {
   /* Make a falling edge on Pin E to write 4 bit high */
   LCD_Send4Bit(PACK_DATA_4BIT_INTERFACE(COMMAND, 1, \
@@ -83,23 +85,23 @@ void LCD_SendCommand(unsigned char Command)
 }
 
 /** @brief Goto position on screen
- * @param x Column index
- * @param y Row index
+ * @param col Column index
+ * @param row Row index
  * @return True if the position is valid
  */
-unsigned char LCD_GotoXY(unsigned char x, unsigned char y)
+uint8 LCD_GotoXY(uint8 col, uint8 row)
 {
-  unsigned char retVal = 1;
-  unsigned char address = 0;
+  uint8 retVal = 1;
+  uint8 address = 0;
 
-  if ((x > (ROW_MAX_LENGTH - 1u)) || \
-      (y > (COL_MAX_LENGTH - 1u)))
+  if ((row > (ROW_MAX_LENGTH - 1u)) || \
+      (col > (COL_MAX_LENGTH - 1u)))
   {
     retVal = 0;
   }
   else
   {
-    address = (0x40u * y) + x;
+    address = (0x40u * row) + col;
     LCD_SendCommand(SET_DDRAM_ADDR_CMD(address));
   }
 
@@ -112,15 +114,15 @@ unsigned char LCD_GotoXY(unsigned char x, unsigned char y)
  * 0  0  D7 D6 D5 D4 E  RS
  * @return None
 */
-static void LCD_Send4Bit(unsigned int Data)
+static void LCD_Send4Bit(uint8 Data)
 {
   ShiftData(Data);
   ShiftLatch();
 }
 
-void LCD_PutString(unsigned char * const Character)
+void LCD_PutString(uint8 * const Character)
 {
-  unsigned char * TempStr = Character;
+  uint8 * TempStr = Character;
 
   while (*TempStr != '\0')
   {
@@ -133,18 +135,18 @@ void LCD_PutString(unsigned char * const Character)
  * @param Character ASCII code
  * @return None
 */
-void LCD_PutChar(unsigned char Character)
+void LCD_PutChar(uint8 Character)
 {
   /* 4-bit high */
   LCD_Send4Bit(PACK_DATA_4BIT_INTERFACE(DATA, 1, \
-                                    ((Character & 0xF0u) >> 4u)));
+                                    ((Character & HIGH_NIBBLE_Mask) >> HIGH_NIBBLE_Pos)));
   LCD_Send4Bit(PACK_DATA_4BIT_INTERFACE(DATA, 0, \
-                                    ((Character & 0xF0u) >> 4u)));
+                                    ((Character & HIGH_NIBBLE_Mask) >> HIGH_NIBBLE_Pos)));
   /* 4-bit low */
   LCD_Send4Bit(PACK_DATA_4BIT_INTERFACE(DATA, 1, \
-                                    ((Character & 0x0Fu))));
+                                    ((Character & LOW_NIBBLE_Mask))));
   LCD_Send4Bit(PACK_DATA_4BIT_INTERFACE(DATA, 0, \
-                                    ((Character & 0x0Fu))));
+                                    ((Character & LOW_NIBBLE_Mask))));
 }
 
 /** @brief Clear the screen 
