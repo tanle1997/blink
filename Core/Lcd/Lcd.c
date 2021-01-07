@@ -74,14 +74,14 @@ void LCD_SendCommand(uint8 Command)
 {
   /* Make a falling edge on Pin E to write 4 bit high */
   LCD_Send4Bit(PACK_DATA_4BIT_INTERFACE(COMMAND, 1, \
-    (Command & 0xF0u) >> 4u));
+    (Command & HIGH_NIBBLE_Mask) >> HIGH_NIBBLE_Pos));
   LCD_Send4Bit(PACK_DATA_4BIT_INTERFACE(COMMAND, 0, \
-    (Command & 0xF0u) >> 4u));
+    (Command & HIGH_NIBBLE_Mask) >> HIGH_NIBBLE_Pos));
   /* Make a falling edge on Pin E to write 4 bit low */
   LCD_Send4Bit(PACK_DATA_4BIT_INTERFACE(COMMAND, 1, \
-    Command & 0x0Fu));
+    Command & LOW_NIBBLE_Mask));
   LCD_Send4Bit(PACK_DATA_4BIT_INTERFACE(COMMAND, 0, \
-    Command & 0x0Fu));
+    Command & LOW_NIBBLE_Mask));
 }
 
 /** @brief Goto position on screen
@@ -91,13 +91,13 @@ void LCD_SendCommand(uint8 Command)
  */
 uint8 LCD_GotoXY(uint8 col, uint8 row)
 {
-  uint8 retVal = 1;
+  uint8 retVal = PASSED;
   uint8 address = 0;
 
   if ((row > (ROW_MAX_LENGTH - 1u)) || \
       (col > (COL_MAX_LENGTH - 1u)))
   {
-    retVal = 0;
+    retVal = FAILED;
   }
   else
   {
