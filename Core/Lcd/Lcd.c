@@ -89,9 +89,9 @@ void LCD_SendCommand(uint8 Command)
  * @param row Row index
  * @return True if the position is valid
  */
-uint8 LCD_GotoXY(uint8 col, uint8 row)
+boolean LCD_GotoXY(uint8 col, uint8 row)
 {
-  uint8 retVal = PASSED;
+  boolean retVal = PASSED;
   uint8 address = 0;
 
   if ((row > (ROW_MAX_LENGTH - 1u)) || \

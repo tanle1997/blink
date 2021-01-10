@@ -97,7 +97,7 @@
 #define LOW_NIBBLE_Pos      (0u)
 /*********************** API ***************************/
 extern void LCD_SendCommand(uint8 Command);
-extern uint8 LCD_GotoXY(uint8 col, uint8 row);
+extern boolean LCD_GotoXY(uint8 col, uint8 row);
 extern void LCD_ClearDisplay(void);
 extern void LCD_Init(void);
 extern void LCD_PutChar(uint8 Character);
