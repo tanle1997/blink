@@ -122,7 +122,7 @@ static void LCD_Send4Bit(uint8 Data)
 
 void LCD_PutString(uint8 * const Character)
 {
-  uint8 * TempStr = Character;
+  const uint8 * TempStr = Character;
 
   while (*TempStr != '\0')
   {
